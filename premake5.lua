@@ -18,6 +18,7 @@ project "chess-ui"
 
     includedirs {
         "deps/glfw/include",
+        "deps/glad/include",
         "deps/glm/include",
         "deps/imgui"
     }

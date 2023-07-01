@@ -1,22 +1,18 @@
 #include <iostream>
 
-#include "GLFW/glfw3.h"
+#include "Application.h"
 
-int main() {
-    int a = 0;
+constexpr auto WINDOW_WIDTH = 1280;
+constexpr auto WINDOW_HEIGHT = 720;
+constexpr auto WINDOW_TITLE = "Chess UI";
 
-    glfwInit();
-    GLFWwindow* window = glfwCreateWindow(1280, 720, "Chess UI", nullptr, nullptr);
-    glfwShowWindow(window);
+int main() 
+{
 
-    while(!glfwWindowShouldClose(window))
-    {
-        glfwPollEvents();
-        glfwSwapBuffers(window);
-    }
 
-    glfwDestroyWindow(window);
-    glfwTerminate();
+    Application* app = new Application(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE);
+    app->Run();
+    delete app;
 
     return 0;
 }
