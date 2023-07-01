@@ -8,12 +8,12 @@
             "windows":{
                 "command": "premake.exe",
                 "args": [
+                    "--cc=clang",
                     "gmake2"
                 ],
             },
 
             "group": "build"
-
         },
         {
             "label": "build-Debug",
