@@ -1,0 +1,36 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "generate-projects",
+            "type": "shell",
+
+            "windows":{
+                "command": "premake.exe",
+                "args": [
+                    "gmake2"
+                ],
+            },
+
+            "group": "build"
+
+        },
+        {
+            "label": "build-Debug",
+            "type": "shell",
+
+            "windows":{
+                "command": "mingw32-make",
+                "args": [
+                    
+                ],
+                "problemMatcher": "$msCompile"
+            },
+
+            "group": "build",
+            "presentation": {
+                "reveal": "silent"
+            },
+        },
+    ]
+}   
