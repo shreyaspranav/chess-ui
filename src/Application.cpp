@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+#include "Renderer.h"
+
 #define GLAD_GL_IMPLEMENTATION
 #include "glad/gl.h"
 #include "GLFW/glfw3.h"
@@ -20,12 +22,17 @@ Application::~Application()
 
 void Application::OnStart()
 {
-    
+    Renderer::Init();
 }
 
 void Application::OnUpdate(double timestep)
 {
-   
+    int windowWidth, windowHeight;
+    glfwGetFramebufferSize(m_Window, &windowWidth, &windowHeight);
+
+    Renderer::Begin(windowWidth, windowHeight);
+    Renderer::DrawQuad({0.0f, 0.0f, 0.0f}, 0.0f, {1.0f, 1.0f}, {0.0f, 1.0f, 0.0f, 1.0f});
+    Renderer::RenderFrame();
 }
 
 void Application::OnExit()
