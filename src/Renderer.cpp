@@ -156,12 +156,12 @@ void Renderer::RenderFrame()
 void Renderer::DrawQuad(const glm::vec3 &pos, float rotation, const glm::vec2 &scale, const glm::vec4 &color)
 {
     for(int i = 0; i < 6; i++)
-        index_data[index_count++] = default_ind[i];
+        index_data[index_count++] = default_ind[i] + vertex_index;
 
     for(int i = 0; i < 4; i++)
     {
-        vertex_data[(vertex_index * 7) + 0] = default_vertices[i].x + pos.x;
-        vertex_data[(vertex_index * 7) + 1] = default_vertices[i].y + pos.y;
+        vertex_data[(vertex_index * 7) + 0] = default_vertices[i].x * scale.x + pos.x;
+        vertex_data[(vertex_index * 7) + 1] = default_vertices[i].y * scale.y + pos.y;
         vertex_data[(vertex_index * 7) + 2] = default_vertices[i].z + pos.z;
 
         vertex_data[(vertex_index * 7) + 3] = color.r;

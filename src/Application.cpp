@@ -31,7 +31,10 @@ void Application::OnUpdate(double timestep)
     glfwGetFramebufferSize(m_Window, &windowWidth, &windowHeight);
 
     Renderer::Begin(windowWidth, windowHeight);
-    Renderer::DrawQuad({0.0f, 0.0f, 0.0f}, 0.0f, {1.0f, 1.0f}, {0.0f, 1.0f, 0.0f, 1.0f});
+    Renderer::DrawQuad({0.5f, 0.0f, 0.0f}, 0.0f, {0.1f, 0.1f}, {0.0f, 1.0f, 0.0f, 1.0f});
+    Renderer::DrawQuad({0.0f, 0.5f, 0.0f}, 0.0f, {0.1f, 0.1f}, {0.0f, 1.0f, 0.0f, 1.0f});
+    Renderer::DrawQuad({0.0f, 0.0f, 0.0f}, 0.0f, {0.1f, 0.1f}, {0.0f, 1.0f, 0.0f, 1.0f});
+    Renderer::DrawQuad({1.0f, 0.5f, 0.0f}, 0.0f, {0.1f, 0.1f}, {0.0f, 1.0f, 0.0f, 1.0f});
     Renderer::RenderFrame();
 }
 
@@ -60,7 +63,7 @@ void Application::Run()
     while (!glfwWindowShouldClose(m_Window))
     {
         glClear(GL_COLOR_BUFFER_BIT);
-        glClearColor(1.0f, 0.0f ,0.0f, 1.0f);
+        glClearColor(0.2f, 0.2f ,0.2f, 1.0f);
 
         Application::OnUpdate(0.0);
 
