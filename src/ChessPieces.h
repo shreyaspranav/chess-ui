@@ -5,12 +5,12 @@
 #include <string>
 
 struct BoardPosition {
-    uint8_t rank; 
     char file;
+    uint8_t rank; 
 
     BoardPosition()
         :rank(1), file('a') {}
-    BoardPosition(uint8_t r, char f)
+    BoardPosition(char f, uint8_t r)
         :rank(r), file(f) {}
 
     bool operator<(const BoardPosition& position) { return rank < position.rank || file < position.file; }
