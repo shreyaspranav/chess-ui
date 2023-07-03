@@ -2,7 +2,7 @@
 
 ChessPieces::ChessPieces(const std::string &initialFEN)
 {
-    LoadFEN(initialFEN);
+    ChessPieces::LoadFEN(initialFEN);
 }
 
 ChessPieces::~ChessPieces()

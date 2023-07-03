@@ -10,6 +10,8 @@ struct BoardPosition {
 
     BoardPosition()
         :rank(1), file('a') {}
+    BoardPosition(uint8_t r, char f)
+        :rank(r), file(f) {}
 
     bool operator<(const BoardPosition& position) { return rank < position.rank || file < position.file; }
 };
