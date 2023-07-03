@@ -17,6 +17,8 @@ private:
     void OnStart();
     void OnUpdate(double timestep);
     void OnExit();
+
+    void RenderChessBoard();
 private:
     GLFWwindow* m_Window;
 

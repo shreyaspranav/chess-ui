@@ -31,10 +31,7 @@ void Application::OnUpdate(double timestep)
     glfwGetFramebufferSize(m_Window, &windowWidth, &windowHeight);
 
     Renderer::Begin(windowWidth, windowHeight);
-    Renderer::DrawQuad({0.5f, 0.0f, 0.0f}, 0.0f, {0.1f, 0.1f}, {0.0f, 1.0f, 0.0f, 1.0f});
-    Renderer::DrawQuad({0.0f, 0.5f, 0.0f}, 0.0f, {0.1f, 0.1f}, {0.0f, 1.0f, 0.0f, 1.0f});
-    Renderer::DrawQuad({0.0f, 0.0f, 0.0f}, 0.0f, {0.1f, 0.1f}, {0.0f, 1.0f, 0.0f, 1.0f});
-    Renderer::DrawQuad({1.0f, 0.5f, 0.0f}, 0.0f, {0.1f, 0.1f}, {0.0f, 1.0f, 0.0f, 1.0f});
+    Application::RenderChessBoard();
     Renderer::RenderFrame();
 }
 
@@ -42,6 +39,21 @@ void Application::OnExit()
 {
     glfwDestroyWindow(m_Window);
     glfwTerminate();
+}
+
+void Application::RenderChessBoard()
+{
+    glm::vec4 dark_square_color = {0.0f, 0.4f, 0.0f, 1.0f};
+    glm::vec4 light_square_color = {1.0f, 0.9921f, 0.8156f, 1.0f};
+
+    for(int i = 0; i < 8; i++) {
+        for(int j = 0; j < 8; j++) {
+            if(i % 2 == j % 2)
+                Renderer::DrawQuad({-0.7f + (i * 0.2f), -0.7f + (j * 0.2f), 0.0f}, 0.0f, {0.2f, 0.2f}, dark_square_color);
+            else
+                Renderer::DrawQuad({-0.7f + (i * 0.2f), -0.7f + (j * 0.2f), 0.0f}, 0.0f, {0.2f, 0.2f}, light_square_color);
+        }
+    }
 }
 
 void Application::Run()
