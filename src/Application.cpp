@@ -8,6 +8,8 @@
 #include "glad/gl.h"
 #include "GLFW/glfw3.h"
 
+float board_x_offset = 0.6f;
+
 Application::Application(uint32_t width, uint32_t height, const char* title)
     :m_Width(width), m_Height(height), m_Title(title)
 {
@@ -49,9 +51,9 @@ void Application::RenderChessBoard()
     for(int i = 0; i < 8; i++) {
         for(int j = 0; j < 8; j++) {
             if(i % 2 == j % 2)
-                Renderer::DrawQuad({-0.7f + (i * 0.2f), -0.7f + (j * 0.2f), 0.0f}, 0.0f, {0.2f, 0.2f}, dark_square_color);
+                Renderer::DrawQuad({-0.7f + board_x_offset + (i * 0.2f), -0.7f + (j * 0.2f), 0.0f}, 0.0f, {0.2f, 0.2f}, dark_square_color);
             else
-                Renderer::DrawQuad({-0.7f + (i * 0.2f), -0.7f + (j * 0.2f), 0.0f}, 0.0f, {0.2f, 0.2f}, light_square_color);
+                Renderer::DrawQuad({-0.7f + board_x_offset + (i * 0.2f), -0.7f + (j * 0.2f), 0.0f}, 0.0f, {0.2f, 0.2f}, light_square_color);
         }
     }
 }
