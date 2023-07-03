@@ -65,8 +65,13 @@ glm::mat4 projectionMatrix;
 
 void Renderer::Init()
 {   
-    vertex_data.reserve(7000);
-    index_data.reserve(6000);
+    //vertex_data.reserve(7000);
+    //index_data.reserve(6000);
+
+    for (int i = 0; i < 7000; i++)
+        vertex_data.push_back(0.0f);
+    for (int i = 0; i < 6000; i++)
+        index_data.push_back(0.0f);
 
     glCreateVertexArrays(1, &vertexArrayID);
     glBindVertexArray(vertexArrayID);
