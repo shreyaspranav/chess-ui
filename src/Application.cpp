@@ -25,6 +25,7 @@ Application::~Application()
 void Application::OnStart()
 {
     Renderer::Init();
+    m_Pieces = new ChessPieces("");
 }
 
 void Application::OnUpdate(double timestep)
@@ -33,12 +34,17 @@ void Application::OnUpdate(double timestep)
     glfwGetFramebufferSize(m_Window, &windowWidth, &windowHeight);
 
     Renderer::Begin(windowWidth, windowHeight);
+
     Application::RenderChessBoard();
+    Application::RenderChessPieces();
+
     Renderer::RenderFrame();
 }
 
 void Application::OnExit()
 {
+    delete m_Pieces;
+
     glfwDestroyWindow(m_Window);
     glfwTerminate();
 }
@@ -55,6 +61,14 @@ void Application::RenderChessBoard()
             else
                 Renderer::DrawQuad({-0.7f + board_x_offset + (i * 0.2f), -0.7f + (j * 0.2f), 0.0f}, 0.0f, {0.2f, 0.2f}, light_square_color);
         }
+    }
+}
+
+void Application::RenderChessPieces()
+{
+    for(const auto& piece : m_Pieces->GetChessPiecesMap())
+    {
+
     }
 }
 

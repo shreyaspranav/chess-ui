@@ -40,6 +40,8 @@ public:
     void LoadFEN(const std::string& FEN);
     const std::string& GetCurrentFEN();
 
+    inline std::map<BoardPosition, ChessPiece> GetChessPiecesMap() { return m_ChessPiecesMap; }
+
 private:
     std::map<BoardPosition, ChessPiece> m_ChessPiecesMap;
 
