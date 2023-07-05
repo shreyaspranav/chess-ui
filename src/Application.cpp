@@ -68,7 +68,7 @@ void Application::RenderChessPieces()
 {
     for(const auto& piece : m_Pieces->GetChessPiecesMap())
     {
-
+        
     }
 }
 
