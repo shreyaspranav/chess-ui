@@ -19,6 +19,8 @@ const char* vs = R"(
 
     layout(location = 0)in vec3 aQuadVertex;
     layout(location = 1)in vec4 aQuadColor;
+    layout(location = 2)in vec2 aQuadTextureCoords;
+    layout(location = 3)in float aQuadTexSlot;
 
     out vec4 quadColor;
 
@@ -52,6 +54,8 @@ glm::vec3 default_vertices[4] = {
     glm::vec3( 0.5f, -0.5f, 0.0f)
 };
 
+const uint8_t stride_count = 10;
+
 std::vector<float> vertex_data;
 std::vector<uint32_t> index_data;
 
@@ -84,11 +88,16 @@ void Renderer::Init()
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBufferID);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6000 * sizeof(int), nullptr, GL_DYNAMIC_DRAW);
 
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (const void*)0);
-    glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (const void*)(3 * sizeof(float)));
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, stride_count * sizeof(float), (const void*)0);
+    glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, stride_count * sizeof(float), (const void*)(3 * sizeof(float)));
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, stride_count * sizeof(float), (const void*)(7 * sizeof(float)));
+    glVertexAttribPointer(3, 1, GL_FLOAT, GL_FALSE, stride_count * sizeof(float), (const void*)(9 * sizeof(float)));
 
-    glEnableVertexAttribArray(0);
-    glEnableVertexAttribArray(1);
+    //glEnableVertexAttribArray(0);
+    //glEnableVertexAttribArray(1);
+
+    for(int i = 0; i < 4; i++)
+        glEnableVertexAttribArray(i);
 
     uint32_t vertexShaderID = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(vertexShaderID, 1, &vs, nullptr);    
@@ -148,7 +157,7 @@ void Renderer::End()
 void Renderer::RenderFrame()
 {
     glBindBuffer(GL_ARRAY_BUFFER, vertexBufferID);
-    glBufferSubData(GL_ARRAY_BUFFER, 0, vertex_index * 7 * sizeof(float), vertex_data.data());
+    glBufferSubData(GL_ARRAY_BUFFER, 0, vertex_index * stride_count * sizeof(float), vertex_data.data());
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBufferID);
     glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, index_count * sizeof(uint32_t), index_data.data());
@@ -158,6 +167,11 @@ void Renderer::RenderFrame()
     glDrawElements(GL_TRIANGLES, index_count, GL_UNSIGNED_INT, 0);
 }
 
+void Renderer::PushTexture(const std::string &textureFilePath, bool flipVertically)
+{
+
+}
+
 void Renderer::DrawQuad(const glm::vec3 &pos, float rotation, const glm::vec2 &scale, const glm::vec4 &color)
 {
     for(int i = 0; i < 6; i++)
@@ -165,14 +179,14 @@ void Renderer::DrawQuad(const glm::vec3 &pos, float rotation, const glm::vec2 &s
 
     for(int i = 0; i < 4; i++)
     {
-        vertex_data[(vertex_index * 7) + 0] = default_vertices[i].x * scale.x + pos.x;
-        vertex_data[(vertex_index * 7) + 1] = default_vertices[i].y * scale.y + pos.y;
-        vertex_data[(vertex_index * 7) + 2] = default_vertices[i].z + pos.z;
+        vertex_data[(vertex_index * stride_count) + 0] = default_vertices[i].x * scale.x + pos.x;
+        vertex_data[(vertex_index * stride_count) + 1] = default_vertices[i].y * scale.y + pos.y;
+        vertex_data[(vertex_index * stride_count) + 2] = default_vertices[i].z + pos.z;
 
-        vertex_data[(vertex_index * 7) + 3] = color.r;
-        vertex_data[(vertex_index * 7) + 4] = color.g;
-        vertex_data[(vertex_index * 7) + 5] = color.b;
-        vertex_data[(vertex_index * 7) + 6] = color.a;
+        vertex_data[(vertex_index * stride_count) + 3] = color.r;
+        vertex_data[(vertex_index * stride_count) + 4] = color.g;
+        vertex_data[(vertex_index * stride_count) + 5] = color.b;
+        vertex_data[(vertex_index * stride_count) + 6] = color.a;
 
         vertex_index++;
     }

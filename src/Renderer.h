@@ -1,5 +1,6 @@
 #pragma once
 #include "glm/glm.hpp"
+#include <string>
 
 class Renderer
 {
@@ -11,5 +12,6 @@ public:
 
     static void RenderFrame();
 
+    static void PushTexture(const std::string& textureFilePath, bool flipVertically = true);
     static void DrawQuad(const glm::vec3& pos, float rotation, const glm::vec2& scale, const glm::vec4& color);
 };

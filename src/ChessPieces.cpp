@@ -25,8 +25,8 @@ ChessPieces::ChessPieces(const std::string &initialFEN)
 
     for(int i = 0; i < 8; i++)
     {
-        m_ChessPiecesMap.insert({{'a' + (char)i, 2}, ChessPiece::WhitePawn});
-        m_ChessPiecesMap.insert({{'a' + (char)i, 7}, ChessPiece::BlackPawn});
+        m_ChessPiecesMap.insert({{'a' + i, 2}, ChessPiece::WhitePawn});
+        m_ChessPiecesMap.insert({{'a' + i, 7}, ChessPiece::BlackPawn});
     }
 }
 

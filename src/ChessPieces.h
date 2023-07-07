@@ -13,7 +13,7 @@ struct BoardPosition {
     BoardPosition(char f, uint8_t r)
         :rank(r), file(f) {}
 
-    bool operator<(const BoardPosition& position) { return rank < position.rank || file < position.file; }
+    bool operator<(const BoardPosition& position) const { return rank < position.rank || file < position.file; }
 };
 
 enum class ChessPiece {
