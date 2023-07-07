@@ -6,7 +6,7 @@
         "preLaunchTask": "build-Debug",
         "request": "launch",
         "program": "${workspaceFolder}/bin/Debug/chess-ui/chess-ui.exe",
-        "cwd": ".",
+        "cwd": "${workspaceFolder}",
         "externalConsole": true,
         "MIMode": "gdb",
         

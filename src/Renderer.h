@@ -14,4 +14,5 @@ public:
 
     static void PushTexture(const std::string& textureFilePath, bool flipVertically = true);
     static void DrawQuad(const glm::vec3& pos, float rotation, const glm::vec2& scale, const glm::vec4& color);
+    static void DrawTexturedQuad(const glm::vec3& pos, float rotation, const glm::vec2& scale, const glm::vec4& color, uint8_t id, glm::vec2 tex_coords[4] = nullptr);
 };

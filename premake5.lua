@@ -20,10 +20,15 @@ project "chess-ui"
         "deps/glfw/include",
         "deps/glad/include",
         "deps/glm/include",
-        "deps/imgui"
+        "deps/imgui",
+        "deps/stb",
     }
 
     links { "GLFW" }
+
+    postbuildcommands {
+        "{COPYDIR} %{wks.location}/assets/ %{wks.location}/bin/%{cfg.buildcfg}/%{prj.name}"
+    }
 
     filter "system:windows"
         links { "gdi32", "user32", "kernel32" }

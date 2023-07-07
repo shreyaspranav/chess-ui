@@ -10,6 +10,13 @@
 
 float board_x_offset = 0.6f;
 
+glm::vec2 tex_coords[4] = {
+    glm::vec2(1.0f, 1.0f),
+    glm::vec2(0.0f, 1.0f),
+    glm::vec2(0.0f, 0.0f),
+    glm::vec2(1.0f, 0.0f),
+};
+
 Application::Application(uint32_t width, uint32_t height, const char* title)
     :m_Width(width), m_Height(height), m_Title(title)
 {
@@ -26,6 +33,8 @@ void Application::OnStart()
 {
     Renderer::Init();
     m_Pieces = new ChessPieces("");
+
+    Renderer::PushTexture("assets/chess_pieces.png", true);
 }
 
 void Application::OnUpdate(double timestep)
@@ -66,6 +75,8 @@ void Application::RenderChessBoard()
 
 void Application::RenderChessPieces()
 {
+    Renderer::DrawTexturedQuad({0.0f, 0.0f, 0.0f}, 0.0f, {3.274f, 1.0f}, {1.0f, 1.0f, 1.0f, 1.0f}, 0, tex_coords);
+
     for(const auto& piece : m_Pieces->GetChessPiecesMap())
     {
         
